@@ -1,0 +1,54 @@
+{% extends 'bases/app.html' %}
+
+{% block title %}Schema{% endblock %}
+{% block body_class %}schema{% endblock %}
+{% block content %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteForm = document.getElementById('delete-db-form');
+
+        deleteForm.addEventListener('submit', function(event) {
+            if (!confirm("Tem certeza que deseja eliminar o esquema?")) {
+                event.preventDefault(); // Impede o envio do formulário se o usuário cancelar
+            }
+        });
+    });
+</script>
+<div class="schema-body">
+    <div class="schema-details">
+        <div class="schema-name">
+            <span>{{details.schema_name}}</span>
+            <!-- formulário para deletar o esquema -->
+            <form method="POST" action="" id="delete-db-form" name="delete-db-form">
+                {% csrf_token %}
+                <button class="drop-schema-button" name="drop-schema-button" title="Drop table">Eliminar</button>
+            </form>
+        </div>
+        <div class="schema-detail">Default character set: &nbsp;&nbsp; {{details.default_character_set}}</div>
+        <div class="schema-detail">Default encryption: &nbsp;&nbsp;{{details.default_encryption}}</div>
+    </div>
+    <div class="schema-tables">
+        <h4 class="table-title">Tabelas</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Linhas</th>
+                    <th>Tipo</th>
+                    <th>Colação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for table in details.tables %}
+                    <tr>
+                        <td>{{table.table_name}}</td>
+                        <td>{{table.table_rows}}</td>
+                        <td>{{table.engine}}</td>
+                        <td>{{table.collation}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

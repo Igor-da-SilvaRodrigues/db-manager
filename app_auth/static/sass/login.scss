@@ -1,0 +1,112 @@
+
+#login-body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00182c;
+    background-image: url('/static/img/login-backrgound.svg');
+    background-size: cover;
+    background-position: center;
+
+    outline: 1px solid white;
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Rubik", sans-serif;
+    }
+    .helptext{
+        display: none;
+    }
+
+    .error{
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 130, 130);
+        border-radius: 3px;
+        padding: 2px 0px 2px 10px;
+        margin-bottom: 10px;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        height: 70%;
+        width: 100%;
+
+        .login-form {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+            
+            
+            #login-title {
+                margin-bottom: 20px;
+                text-align: center;
+                color: #00182c;
+            }
+
+            
+            label {
+                display: block;
+                margin-bottom: 5px;
+                
+            }
+        
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #00182c;
+                border-radius: 4px;
+                margin-bottom: 15px;
+            }
+            
+            .form-row{
+                display: flex;
+                align-items: center;
+                
+                .field-port{
+                    width: calc(4em + 2px);// 4 characters width plus some padding
+                }
+
+                .field-host{
+                    margin-right: 10px;
+                    flex: 1;
+                }
+                
+            }
+
+
+            
+
+            button {
+                width: 100%;
+                padding: 10px;
+                background-color: #1B476B;
+                border: none;
+                border-radius: 4px;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #1b476bdd;
+                    
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+

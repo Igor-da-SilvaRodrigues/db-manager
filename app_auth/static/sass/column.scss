@@ -1,0 +1,219 @@
+body.column {
+
+    > #main {
+        display: flex;
+        justify-content: center;
+
+        > span {
+            position: absolute;
+            right: 0;
+            color: white;
+            padding: 10px;
+            max-width: 50%;
+            border-radius: 5px;
+            margin: 5px;
+
+            &.error {
+                background-color: #ff4747;
+                border: 1px solid #b90000;
+            }
+
+            &.success {
+                background-color: #00d076;
+                border: 1px solid #00884d;
+            }
+        }
+
+        > form {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70%;
+            gap: 20px;
+
+            > h1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-self: start;
+                color: #0d496d;
+                gap: 10px;
+
+                > img {
+                    height: 15px;
+                }
+            }
+
+            > div {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+
+                > button {
+                    padding: 7px 14px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+                > button:first-child {
+                    background-color: #545454;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 5px;
+
+                    > img {
+                        width: 10px;
+                        transform: rotate(180deg);
+                    }
+                }
+
+                > button:nth-child(2) {
+                    background-color: #00818f;
+                    color: white;
+
+                    &:hover {
+                        color: #00ffe1;
+                    }
+                }
+            }
+
+            > ul {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+
+                > li {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    > label {
+                        height: 15px;
+                        padding: 10px 0 10px 10px;
+                        width: 100px;
+                        background-color: #003c4e;
+                        border: 1px solid #00000078;
+                        border: 1px solid black;
+                        border-top-left-radius: 5px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        border-bottom-left-radius: 5px;
+                        color: white;
+                        font-size: 0.8rem;
+                    }
+
+                    > input, select, textarea, ul > li > input {
+                        font-size: 0.8rem;
+                        resize: none;
+                        height: 15px;
+                        padding: 10px 0 10px 10px;
+                        width: calc(100% - 100px);
+                        border: 1px solid #00000078;
+                        border-top-left-radius: 0;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        border-bottom-left-radius: 0;
+                        background-color: #eff7ffbf;
+                    }
+
+                    > select {
+                        height: 37px;
+                    }
+
+                    &#fk_table_field, &#fk_column_field, &#max_length_field, &#enum_type_options_field {
+                        display: none;
+
+                        &.show {
+                            display: flex;
+                        }
+                    }
+
+                    &.multiple-input {
+                        flex-direction: column;
+
+                        > label {
+                            width: 98%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            border-radius: 5px;
+
+                            > button {
+                                margin-right: 10px;
+                                font-size: 0.8rem;
+                                font-weight: bold;
+                                color: #00586c;
+                                background: #ffffff80;
+                                border-radius: 3px;
+                                height: 20px;
+                                width: 20px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                cursor: pointer;
+                                border: none;
+
+                                &:hover {
+                                    color: #fff;
+                                    background: #0095ad;
+                                    border: 1px solid #006577;
+                                    transition: $default_transition;
+                                }
+                            }
+                        }
+
+                        > ul {
+                            width: 100%;
+                            align-items: center;
+                            background-color: #eff7ffbf;
+                            border: 1px solid #00000078;
+                            padding: 10px 0;
+                            margin-top: 5px;
+                            border-radius: 5px;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 10px;
+                            justify-content: center;
+                            justify-items: center;
+
+                            > li {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 10px;
+
+                                > input {
+                                    border-radius: 5px;
+                                    width: 100%;
+                                    background-color: rgba(239, 247, 255, 0.64);
+                                }
+
+                                > button {
+                                    padding: 0 10px;
+                                    margin-right: 10px;
+                                    font-size: 0.8rem;
+                                    font-weight: bold;
+                                    color: #fff;
+                                    background: #ff2d2dbf;
+                                    border-radius: 3px;
+                                    height: 20px;
+                                    width: 20px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Rubik", sans-serif;
+}
+
+#main_body {
+    min-height: 100vh;
+    max-width: 100vw;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: "header header"
+                         "nav main";
+
+    > #main {
+        grid-area: main;
+        background-color: #5b5b5b45;
+    }
+}

@@ -1,0 +1,88 @@
+{% extends 'bases/app.html' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block body_class %}dashboard{% endblock %}
+{% block content %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // inserir 4 espaços ao pressionar tab no editor
+        var textarea = document.getElementById('sql-input');
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+
+                // Insert 4 spaces
+                this.value = this.value.substring(0, start) + "    " + this.value.substring(end);
+
+                // Place the cursor 4 spaces ahead
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+    });
+</script>
+
+<div id="dashboard-container">
+    <div id="input-section">
+        <!-- formulário sql -->
+        <form method="POST" action="" class="sql-form" >
+            {% csrf_token %}
+            <label for="sql">Executar consulta(s) SQL</label>
+            {{sql_form}}
+            <button type="submit" name="sql-input-form-button">Executar</button>
+        </form>
+        <!-- formulário para criar bancos de dados / esquemas -->
+        <div class="new-db-form">
+            <label for="new-db-form">Criar esquemas</label>
+            <form method="POST" action="" name="new-db-form">
+                {% csrf_token %}
+                {{new_db_form}}
+                <button type="submit" name="new-db-form-button">Salvar</button>
+            </form>
+        </div>
+    </div>
+    <div id="output-section">
+        <!-- saída -->
+        <label for="output-section">Saída</label>
+        {% for result in sql_results %}
+            <div class="output-group">
+                {% if result.is_error %}
+                    <div class="output-error">
+                        <span>Um erro ocorreu: {{result.error}} causado por comando</span>
+                        <code>{{result.mog_command}}</code>
+                    </div>
+                {% else %}
+                    <div class="output-message">
+                        <span>{{result.affected_rows}} linha(s) afetada(s) por comando</span>
+                        <code>{{result.mog_command}}</code>
+                    </div>
+                    {% if result.result_len > 0 %}
+                        <div class="output-table">
+                            <h4 class="table-title">Output table</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        {% for header in result.headers %}
+                                            <th>{{header}}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in result.rows %}
+                                        <tr>
+                                            {% for value in row %}
+                                            <td>{{value}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

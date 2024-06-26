@@ -1,0 +1,210 @@
+{% extends 'bases/app.html' %}
+{% load static %}
+{% block title %}Column{% endblock %}
+{% block body_class %}column{% endblock %}
+{% block content %}
+    <span class="message {{ response.type }}">{{ response.message }}</span>
+    <form action="{{ submit_endpoint }}" method="{{ method }}">
+        {% csrf_token %}
+        <h1><img src="{% static 'img/icons/arrow-black.png' %}">{{ button_label }} Column</h1>
+        <div>
+            <button><img src="{% static 'img/icons/long-arrow.png' %}">Back Table</button>
+            <button type="submit">{{ button_label }}</button>
+        </div>
+        <ul>
+            <input name="old_name" value="{{ column }}" placeholder="Name" hidden>
+            <input name="old_pk" value="{{ field_values.pk }}" placeholder="Name" hidden>
+            <li>
+                <label>Schema</label>
+                <input name="schema" required value="{{ schema }}" placeholder="Schema" readonly>
+            </li>
+            <li>
+                <label>Table</label>
+                <input name="table" required value="{{ table }}" placeholder="Table" readonly>
+            </li>
+            <li>
+                <label>Name</label>
+                <input name="name" required value="{{ column }}" placeholder="Name">
+            </li>
+            <li>
+                <label>Type</label>
+                <select id="select_type" name="type">
+                    <option {% if field_values.type == 'CHAR' %} selected {% endif %} class="require-length"
+                                                                 value="CHAR">CHAR
+                    </option>
+                    <option {% if field_values.type == 'VARCHAR' %} selected {% endif %} class="require-length"
+                                                                    value="VARCHAR">VARCHAR
+                    </option>
+                    <option {% if field_values.type == 'BINARY' %} selected {% endif %} class="require-length"
+                                                                   value="BINARY">BINARY
+                    </option>
+                    <option {% if field_values.type == 'VARBINARY' %} selected {% endif %} class="require-length"
+                                                                      value="VARBINARY">VARBINARY
+                    </option>
+                    <option {% if field_values.type == 'TINYBLOB' %} selected {% endif %} value="TINYBLOB">TINYBLOB
+                    </option>
+                    <option {% if field_values.type == 'TINYTEXT' %} selected {% endif %} class="require-length"
+                                                                     value="TINYTEXT">TINYTEXT
+                    </option>
+                    <option {% if field_values.type == 'TEXT' %} selected {% endif %} class="require-length"
+                                                                 value="TEXT">TEXT
+                    </option>
+                    <option {% if field_values.type == 'BLOB' %} selected {% endif %} class="require-length"
+                                                                 value="BLOB">BLOB
+                    </option>
+                    <option {% if field_values.type == 'MEDIUMTEXT' %} selected {% endif %} class="require-length"
+                                                                       value="MEDIUMTEXT">MEDIUMTEXT
+                    </option>
+                    <option {% if field_values.type == 'MEDIUMBLOB' %} selected {% endif %} value="MEDIUMBLOB">
+                        MEDIUMBLOB
+                    </option>
+                    <option {% if field_values.type == 'LONGTEXT' %} selected {% endif %} class="require-length"
+                                                                     value="LONGTEXT">LONGTEXT
+                    </option>
+                    <option {% if field_values.type == 'LONGBLOB' %} selected {% endif %} value="LONGBLOB">LONGBLOB
+                    </option>
+                    <option {% if field_values.type == 'ENUM' %} selected {% endif %} class="require-options"
+                                                                 value="ENUM">ENUM
+                    </option>
+                    <option {% if field_values.type == 'SET' %} selected {% endif %} class="require-options"
+                                                                value="SET">SET
+                    </option>
+                    <option {% if field_values.type == 'BIT' %} selected {% endif %} class="require-length" value="BIT">
+                        BIT
+                    </option>
+                    <option {% if field_values.type == 'TINYINT' %} selected {% endif %} value="TINYINT">TINYINT
+                    </option>
+                    <option {% if field_values.type == 'BOOL' %} selected {% endif %} value="BOOL">BOOL</option>
+                    <option {% if field_values.type == 'BOOLEAN' %} selected {% endif %} value="BOOLEAN">BOOLEAN
+                    </option>
+                    <option {% if field_values.type == 'SMALLINT' %} selected {% endif %}  value="SMALLINT">SMALLINT
+                    </option>
+                    <option {% if field_values.type == 'MEDIUMINT' %} selected {% endif %} value="MEDIUMINT">MEDIUMINT
+                    </option>
+                    <option {% if field_values.type == 'INT' %} selected {% endif %} value="INT">
+                        INT
+                    </option>
+                    <option {% if field_values.type == 'INTEGER' %} selected {% endif %}
+                                                                    value="INTEGER">INTEGER
+                    </option>
+                    <option {% if field_values.type == 'BIGINT' %} selected {% endif %}
+                                                                   value="BIGINT">BIGINT
+                    </option>
+                    <option {% if field_values.type == 'FLOAT' %} selected {% endif %}
+                                                                  value="FLOAT">FLOAT
+                    </option>
+                    <option {% if field_values.type == 'DOUBLE' %} selected {% endif %}
+                                                                   value="DOUBLE">DOUBLE
+                    </option>
+                    <option {% if field_values.type == 'DOUBLE PRECISION' %} selected {% endif %}
+                                                                             value="DOUBLE PRECISION">DOUBLE PRECISION
+                    </option>
+                    <option {% if field_values.type == 'DECIMAL' %} selected {% endif %}
+                                                                    value="DECIMAL">DECIMAL
+                    </option>
+                    <option {% if field_values.type == 'DEC' %} selected {% endif %} value="DEC">
+                        DEC
+                    </option>
+                    <option {% if field_values.type == 'DATE' %} selected {% endif %} value="DATE">DATE</option>
+                    <option {% if field_values.type == 'DATETIME' %} selected {% endif %} value="DATETIME">DATETIME
+                    </option>
+                    <option {% if field_values.type == 'TIMESTAMP' %} selected {% endif %} value="TIMESTAMP">TIMESTAMP
+                    </option>
+                    <option {% if field_values.type == 'TIME' %} selected {% endif %} value="TIME">TIME</option>
+                    <option {% if field_values.type == 'YEAR' %} selected {% endif %} value="YEAR">YEAR</option>
+                </select>
+            </li>
+            <li id="max_length_field">
+                <label>Max Length</label>
+                <input name="max_length" type="number" min="1" step="1" value="{{ field_values.max_length }}"
+                       placeholder="Max Length">
+            </li>
+            <li id="enum_type_options_field" class="multiple-input">
+                <label>
+                    <span>Options</span>
+                    <button id="add_enum_option_button" type="button">+</button>
+                </label>
+                <ul id="enum_list">
+                    {% if field_values.options %}
+                        {% for option in field_values.options %}
+                            {% if forloop.counter0 == 0 %}
+                                <li class="not-delete">
+                                    <input name="options" multiple placeholder="Option" value="{{ option.0 }}">
+                                    <button type="button" class="remove-node">x</button>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <input name="options" multiple placeholder="Option" value="{{ option }}">
+                                    <button type="button" class="remove-node">x</button>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <li class="not-delete">
+                            <input name="options" multiple placeholder="Option">
+                            <button type="button" class="remove-node">x</button>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li>
+                <label>Nullable</label>
+                <select name="nullable" required>
+                    {% if field_values.nullable == "1" %}
+                        <option value="0">False</option>
+                        <option selected value="1">True</option>
+                    {% else %}
+                        <option selected value="0">False</option>
+                        <option value="1">True</option>
+                    {% endif %}
+                </select>
+            </li>
+            <li>
+                <label>Default</label>
+                <input name="default" value="{{ field_values.default }}" placeholder="Default">
+            </li>
+            <li>
+                <label>Primary Key</label>
+                <select name="pk">
+                    {% if field_values.pk == "1" %}
+                        <option value="0">False</option>
+                        <option value="1" selected>True</option>
+                    {% else %}
+                        <option value="0" selected>False</option>
+                        <option value="1">True</option>
+                    {% endif %}
+                </select>
+            </li>
+            <li>
+                <label>Foreing Key</label>
+                <select id="foreign_key_bool" name="fk">
+                    {% if field_values.fk == "1" %}
+                        <option value="0">False</option>
+                        <option value="1" selected>True</option>
+                    {% else %}
+                        <option value="0" selected>False</option>
+                        <option value="1">True</option>
+                    {% endif %}
+                </select>
+            </li>
+            <li id="fk_table_field">
+                <label>FK Table</label>
+                <select id="fk_table_select" name="fk_table">
+                    {% for table, columns in table_columns.items %}
+                        {% if field_values.fk_table == table %}
+                            <option selected value="{{ table }}" data-columns="{{ columns }}"
+                                    data-selected="{{ field_values.fk_column }}">{{ table }}</option>
+                        {% else %}
+                            <option value="{{ table }}" data-columns="{{ columns }}">{{ table }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </li>
+            <li id="fk_column_field">
+                <label>FK Column</label>
+                <select id="fk_column_select" name="fk_column">
+                </select>
+            </li>
+        </ul>
+    </form>
+{% endblock %}

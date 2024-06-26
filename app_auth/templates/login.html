@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" id="login-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DBManager Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body id="login-body">
+        
+        <div class="container">
+            <img src="{% static 'img/logo.png' %}" style="max-width: 300px;width: 100%;">
+            
+            <form method="POST" action="" class="login-form">
+                {% csrf_token %}
+                <h2 id="login-title">Login</h2>
+                {% if isUnauthorized%}
+                    <div class="error">Credenciais incorretas.</div>
+                {% endif %}
+                {% if isNetworkError%}
+                    <div class="error">Não foi possível conectar-se ao servidor.</div>
+                {% endif %}
+                {% if isUnexpectedError%}
+                    <div class="error">Erro interno.</div>
+                {% endif %}
+                <div>
+                    {{form.username.label_tag}} {{form.username}}
+                </div>
+                <div class="form-row">
+                    <div class="field-host">
+                        {{form.host.label_tag}} {{form.host}}
+                    </div>
+                    <div class="field-port">
+                        {{form.port.label_tag}} {{form.port}}
+                    </div>
+                </div>
+                <div>
+                    {{form.password.label_tag}} {{form.password}}
+                </div>
+                <button type="submit" name="entrar">Entrar</button>
+            </form>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const portInput = document.getElementById('portInput');
+                portInput.addEventListener('keypress', function(event) {
+                    // Prevent any non-numeric key presses
+                    if (event.which < 48 || event.which > 57) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

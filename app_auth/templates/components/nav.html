@@ -1,0 +1,44 @@
+<nav id="main_nav">
+    {% load static %}
+    <img src="{% static 'img/logo.png' %}">
+    <hr>
+    <ul>
+        {% for schema in schemas.values %}
+            <li class="nav-schema-row">
+                <div>
+                    <button class="schema-button" related-drop-list-id="schema_{{ schema.schema }}">+</button>
+                    <img src="{% static 'img/icons/database.png' %}">
+                    <a href="{% url 'schema.show' schema.schema %}">{{ schema.schema }}</a>
+                </div>
+                <ul class="nav-table-row" id="schema_{{ schema.schema }}">
+                    {% for table, columns in schema.tables.items %}
+                        <li>
+                            <div>
+                                <button class="table-button"
+                                        related-drop-list-id="schema_{{ schema.schema }}_table_{{ table }}">+
+                                </button>
+                                <img src="{% static 'img/icons/table.png' %}">
+                                <a href="{% url 'table.show' schema.schema table %}"
+                                   title="Table: {{ table }}">{{ table }}</a>
+                            </div>
+                            <ul class="nav-column-row" id="schema_{{ schema.schema }}_table_{{ table }}">
+                                {% for column in columns %}
+                                    <li>
+                                        <a href="{% url 'column.show' schema.schema table column %}">
+                                            <button>
+                                                <img class="black" src="{% static 'img/icons/arrow-black.png' %}">
+                                                <img class="white" src="{% static 'img/icons/arrow-white.png' %}">
+                                            </button>
+                                            <img src="{% static 'img/icons/column.png' %}">
+                                            <span>{{ column }}</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

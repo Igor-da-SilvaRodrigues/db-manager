@@ -1,0 +1,9 @@
+#main_header {
+    grid-area: header;
+    background-color: #00182c;
+    border-bottom: 3px solid #00fff7;
+
+    > img {
+        height: 100px;
+    }
+}

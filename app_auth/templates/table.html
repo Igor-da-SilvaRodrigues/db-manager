@@ -1,0 +1,61 @@
+{% extends 'bases/app.html' %}
+
+{% block title %}Tabela de Colunas{% endblock %}
+{% block body_class %}table{% endblock %}
+
+{% block content%}
+<div>
+  <style>
+  h2 {
+     text-align: center;
+     margin-top: 50px;
+     border: 5px solid #00182c;
+     border-bottom: 0px;
+     
+
+  }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 5px solid #00182c;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+  <h2>Tabela de Colunas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>NOME DA COLUNA</th>
+        <th>NULO</th>
+        <th>TIPO DE COLUNA</th>
+        <th>TIPO DE CHAVE</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for coluna in tc %}
+        <tr>
+            <td>{{coluna.0}}</td>
+            <td>{{coluna.1}}</td>
+            <td>{{coluna.2}}</td>
+            <td>{{coluna.3}}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,182 @@
+#dashboard-container{
+    padding: 20px;
+    color: white;
+    label{
+        color: rgba(255, 255, 255, 0.679);
+    }
+
+    
+    #input-section{
+        background-color: #00182c;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.514);
+        padding: 10px;
+
+        .sql-form{
+            width: 80%;
+            min-width: 200px;
+            label{
+                display: block;
+                
+            }
+            textarea{
+                background-color: #002441;
+                color: white;
+                resize: none;
+                overflow: auto;
+                padding-left: 10px;
+                padding-top: 10px;
+                margin-top: 10px;
+                border: none;
+                outline: 0px solid rgb(255, 255, 255);
+                width: 99%;
+                font-family: "Roboto Mono", monospace;
+                &:focus{
+                    outline: 2px solid #00fff7;
+                }
+
+            }
+            textarea::-webkit-resizer {
+                display: none;
+            }
+            button {
+                margin-top: 10px;
+                max-width: 200px;
+                width: 100%;
+                padding: 10px;
+                background-color: #1B476B;
+                border: none;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+        
+                &:hover {
+                    background-color: #1b476bdd;
+                    
+                }
+            }
+        }
+
+        .new-db-form{
+            display: flex;
+            flex-direction: column;
+            background-color: #00182c;
+            border-left: 2px solid gray;
+            min-width: 150px;
+            width: 15%;
+            
+            > label{
+                margin-left: 10px;
+            }
+
+            form{
+                margin-top: 20px;
+                margin-left: 10px;
+
+                button {
+                    width: 100%;
+                    padding: 10px;
+                    background-color: #1B476B;
+                    border: none;
+                    color: white;
+                    cursor: pointer;
+                    margin-top: 10px;
+                    &:hover {
+                        background-color: #1b476bdd;
+                        
+                    }
+                }
+
+            }
+
+            input {
+                padding: 10px;
+                border: 1px solid #00182c;
+                width: calc(100% - 21px);
+                color: white;
+                background-color: #002441;
+
+                &:focus{
+                    outline: 1px solid #00fff7;
+                }
+            }
+
+        }
+    }
+
+    #output-section{
+        background-color: #00182c;
+
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.514);
+        margin-top: 20px;
+        padding: 10px;
+        min-height: 150px;
+
+        code{
+            background-color: rgba(0, 0, 0, 0.597);
+            border-radius: 2px;
+            font-family: "Roboto Mono", monospace;
+            padding: 0px 6px 0px 6px;
+            color: rgb(255, 255, 255);
+        }
+
+        .output-group{
+            margin-bottom: 50px;
+        }
+
+        .output-message{
+            margin-top: 10px;
+            background-color: #00fff780;
+            padding: 10px;
+            border-radius: 2px;
+
+        }
+        
+        .output-error{
+            margin-top: 10px;
+            background-color: rgb(255, 130, 130);
+            color: black;
+            padding: 10px;
+            border-radius: 2px;
+
+        }
+
+        .output-table{
+            margin-top: 10px;
+            margin-bottom: 30px;
+            color: white;
+
+            .table-title{
+                text-align: center;
+                background-color: #00fff780;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse; /* Ensure borders collapse properly */
+                border: 1px solid #00fff780;
+            }
+
+             th {
+                background-color: #002441; 
+                padding: 10px;
+                text-align: left;
+            }
+            
+             td {
+                padding: 10px;
+                text-align: left;
+            }
+            
+            /* Alternate row background color for better readability */
+             tbody tr:nth-child(even) {
+                background-color: #002441;            }
+            
+            /* Hover effect on rows */
+             tbody tr:hover {
+                background-color: #e9ecef63;
+            }
+        }
+    }
+}
